@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+  <style type="text/css">
+    * {
+      padding: 0;
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-image: url("");
+      background-size: cover;
+      font-family: sans-serif;
+      margin-top: 40px;
+      height: 100vh;
+      padding: 0;
+      margin: 0;
+    }
+
+    table {
+      border: 0px;
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 86%;
+      margin: auto;
+    }
+    .table-borderless > :not(caption) > * > * {
+      border-bottom-width: 0;
+    }
+
+    td,
+    th {
+      border: 1px solid black !important;
+      padding: 5px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+    .my-button {
+      width: 450px;
+      height: 60px;
+    }
+
+    /* Styles for screens smaller than 768px */
+    @media only screen and (max-width: 768px) {
+      .my-button {
+        width: 80%; /* Adjust percentage as needed */
+      }
+    }
+
+    /* Styles for screens smaller than 480px (optional) */
+    @media only screen and (max-width: 480px) {
+      .my-button {
+        width: 60%; /* Adjust percentage as needed */
+      }
+    }
+  </style>
+
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link rel="apple-touch-icon" href="assets\img\apple-touch-icon.svg" />
+    <link rel="icon" href="assets\img\apple-touch-icon.svg" />
+    <title>facecissus - Face Recognition-based Attendance System</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <div class="card-borderless mb-3" style="max-width: 3000px">
+      <div class="row g-0">
+        <div class="col-md-1" style="padding: 30px" width="200" height="200">
+          <img
+            src="assets/img/apple-touch-icon2.svg"
+            class="img-fluid rounded-start"
+            alt="Icon Image"
+          />
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h1
+              style="
+                width: auto;
+                color: black;
+                padding-top: 10px;
+                font-size: 45px;
+                font: inter;
+              "
+            >
+              <strong>facecissus</strong>
+            </h1>
+            <l style="width: auto; color: black; font-size: 28px">
+              Face Recognition-based Attendance System
+            </l>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% if mess%}
+    <p class="text-center" style="color: red; font-size: 20px">{{ mess }}</p>
+    {% endif %}
+
+    <div class="row text-center" style="padding: 20px; margin: 20px">
+      <div
+        class="col"
+        style="
+          border-radius: 20px;
+          padding: 0px;
+          background-color: #fff9e2;
+          margin: 0px 20px 10px 10px;
+          min-height: 400px;
+        "
+      >
+        <h2
+          style="
+            border-radius: 20px 20px 0px 0px;
+            background-color: #ffea76;
+            color: black;
+            padding: 10px;
+          "
+        >
+          Today's Attendance
+        </h2>
+        <a style="text-decoration: none; max-width: 300px" href="/start">
+          <button
+            style="
+              padding: 10px;
+              margin-top: 20px;
+              margin-bottom: 20px;
+              font-size: 24px;
+              border-radius: 20px;
+              border-color: #ffdc3e;
+              background: #ffdc3e;
+            "
+            type="submit"
+            class="btn my-button"
+          >
+            Take Attendance
+          </button>
+        </a>
+        <div style="max-height: 200px; overflow-y: auto">
+          <table
+            style="
+              border: none;
+              border-color: #fff9e2;
+              background-color: #ffea76;
+            "
+          >
+            <thead>
+              <tr>
+                <td><b>No.</b></td>
+                <td><b>Name</b></td>
+                <td><b>ID</b></td>
+                <td><b>Time</b></td>
+              </tr>
+            </thead>
+            <tbody>
+              {% if l %} {% for i in range(l) %}
+              <tr style="background-color: #ffffff; border-radius: 10px">
+                <td>{{ i+1 }}</td>
+                <td>{{ names[i] }}</td>
+                <td>{{ rolls[i] }}</td>
+                <td>{{ times[i] }}</td>
+              </tr>
+              {% endfor %} {% endif %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div
+        class="col"
+        style="
+          border-radius: 20px;
+          padding: 0px;
+          background-color: #fff9e2;
+          margin: 0px 10px 10px 20px;
+          height: 400px;
+        "
+      >
+        <form action="/add" method="POST" enctype="multipart/form-data">
+          <h2
+            style="
+              border-radius: 20px 20px 0px 0px;
+              background-color: #ffea76;
+              color: black;
+              padding: 10px;
+            "
+          >
+            Add New User
+          </h2>
+          <label style="font-size: 20px"><b>Enter username</b></label>
+          <br />
+          <input
+            type="text"
+            id="newusername"
+            name="newusername"
+            style="
+              font-size: 20px;
+              margin-top: 10px;
+              margin-bottom: 10px;
+              border-radius: 10px;
+              border: 20px;
+            "
+            required
+          />
+          <br />
+          <label style="font-size: 20px"><b>Enter student ID</b></label>
+          <br />
+          <input
+            type="number"
+            id="newusereid"
+            name="newuserid"
+            style="
+              font-size: 20px;
+              margin-top: 10px;
+              margin-bottom: 10px;
+              border-radius: 10px;
+              border: 20px;
+            "
+            required
+          />
+          <br />
+          <button
+            style="
+              width: 232px;
+              margin-top: 20px;
+              font-size: 24px;
+              font-color: black;
+              border-radius: 20px;
+              border-color: #ffdc3e;
+              background: #ffdc3e;
+              width: 170px;
+              height: 60px;
+            "
+            type="submit"
+            class="btn"
+          >
+            Add
+          </button>
+          <br />
+          <h5 style="padding: 25px">Total Users in Database: {{totalreg}}</h5>
+        </form>
+      </div>
+    </div>
+    <!-- Buttons aligned horizontally -->
+    <div class="text-center" style="padding: 20px">
+      <!-- Button 1: View Registered Users -->
+      <a
+        href="/listusers"
+        class="btn"
+        style="
+          width: 400px;
+          font-size: 24px;
+          font-color: black;
+          border-radius: 20px;
+          border-color: #ffdc3e;
+          background: #ffdc3e;
+          height: 60px;
+          margin-right: 10px; /* Add margin to separate buttons */
+        "
+        >View Registered Users</a
+      >
+
+      <!-- Button 2: View Today's Attendance -->
+      <a
+        href="/attendance"
+        class="btn"
+        style="
+          width: 400px;
+          font-size: 24px;
+          font-color: black;
+          border-radius: 20px;
+          border-color: #ffdc3e;
+          background: #ffdc3e;
+          height: 60px;
+          margin-right: 10px; /* Add margin to separate buttons */
+        "
+        >View Today's Attendance</a
+      >
+
+      <!-- Button 3: Retrain Model -->
+      <a
+        href="/retrain"
+        class="btn"
+        style="
+          width: 400px;
+          font-size: 24px;
+          font-color: black;
+          border-radius: 20px;
+          border-color: #ffdc3e;
+          background: #ffdc3e;
+          height: 60px;
+        "
+        >Retrain Model</a
+      >
+    </div>
+    <!-- Add this button inside the body of your home.html file -->
+    <form action="/logout" method="POST">
+      <button type="submit" class="btn btn-danger">Logout</button>
+    </form>
+
+    <div
+      id="datetime"
+      style="
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        font-size: 18px;
+        font-color: #f0f0f0;
+      "
+    ></div>
+    <!-- Add padding to create space above the footer -->
+    <div
+      class="row text-center"
+      style="padding: 20px; margin: 20px; padding-bottom: 100px"
+    >
+      <!-- Content here -->
+    </div>
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer" style="margin-top: -100px">
+      <div class="copyright" style="text-align: center">
+        &copy; <strong><span>Narcissus Tech</span></strong> 2024
+      </div>
+    </footer>
+    <!-- End Footer -->
+
+    <script>
+      function updateDateTime() {
+        var now = new Date();
+        var datetimeElement = document.getElementById("datetime");
+        var dateString = now.toLocaleDateString(undefined, {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+        var timeString = now.toLocaleTimeString(undefined, {
+          hour: "numeric",
+          minute: "2-digit",
+          hour12: true,
+        });
+        datetimeElement.textContent = dateString + " | " + timeString;
+      }
+      // Update the date and time every second
+      setInterval(updateDateTime, 1000);
+      // Initial call to display the date and time immediately
+      updateDateTime();
+    </script>
+  </body>
+</html>
