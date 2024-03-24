@@ -99,10 +99,11 @@ def login():
         # If request method is GET, render the login form
         return render_template('login.html')
     
-    # Create an empty users.csv file
-with open('users.csv', 'w', newline='') as file:
-    writer = csv.writer(file)
-    writer.writerow(['username', 'password'])  # Write header row
+# Create users.csv file if it doesn't exist
+if not os.path.isfile('users.csv'):
+    with open('users.csv', 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(['username', 'password'])  # Write header row
 
 # Face counter so the higher the value the more accurate ang problem is more storage and computing
 # power yung needed. recommended is around 50 to 200 picture and if possible mas better camera 
