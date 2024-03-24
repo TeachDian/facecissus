@@ -1,22 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
-</head>
-<body>
-    <h2>Login</h2>
-    {% if error %}
-    <p style="color: red;">{{ error }}</p>
-    {% endif %}
-    <form method="POST">
-        <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username" required><br><br>
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password" required><br><br>
+    <!-- Paste the CSS styles from the first HTML code here -->
+    <style type="text/css">
+      * {
+        padding: 0;
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: white; /* Set the background color to white */
+        font-family: sans-serif;
+        padding: 20px;
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 28px;
+        color: black;
+      }
+
+      form {
+        max-width: 400px;
+        margin: auto;
+        background-color: #fff9e2; /* Set the form background color */
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid black;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 20px;
+        color: black;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+        width: calc(
+          100% - 24px
+        ); /* Adjusted width to account for padding and border */
+        padding: 10px;
+        margin-bottom: 20px;
+        font-size: 18px;
+        border-radius: 5px;
+        border: 1px solid black;
+        box-sizing: border-box; /* Ensure padding and border are included in the width */
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        font-size: 20px;
+        border-radius: 10px;
+        border: none;
+        background-color: #ffdc3e; /* Set the button background color */
+        color: black;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #ffcc00; /* Change button color on hover */
+      }
+
+      p {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 16px;
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h2>Login</h2>
+      {% if error %}
+      <p style="color: red">{{ error }}</p>
+      {% endif %}
+    </div>
+    <div>
+      <form method="POST">
+        <label for="username">Username:</label>
+        <input
+          style="width: 400px"
+          type="text"
+          id="username"
+          name="username"
+          required
+        />
+
+        <label for="password">Password:</label>
+        <input
+          style="width: 400px"
+          type="password"
+          id="password"
+          name="password"
+          required
+        />
+
         <button type="submit">Login</button>
-    </form>
-    <p>Don't have an account? <a href="{{ url_for('register') }}">Register here</a></p>
-</body>
+      </form>
+    </div>
+    <div>
+      <p>
+        Don't have an account?
+        <a href="{{ url_for('register') }}">Register here</a>
+      </p>
+    </div>
+  </body>
 </html>
