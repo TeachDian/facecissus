@@ -8,16 +8,16 @@
 # pip install pip install face_recognition
 # pip install numpy
 # pip install opencv-python
+from flask import Flask, render_template, request, redirect, url_for, session
+from datetime import date, datetime
 import cv2
 import os
 import csv
-from flask import Flask, render_template, request, redirect, url_for, session
-from datetime import date
-from datetime import datetime
 import numpy as np
-from sklearn.neighbors import KNeighborsClassifier
 import pandas as pd
 import joblib
+from sklearn.neighbors import KNeighborsClassifier
+
 
 # Defining Flask App
 app = Flask(__name__)
