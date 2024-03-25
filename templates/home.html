@@ -66,8 +66,14 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
     />
-    <link rel="apple-touch-icon" href="assets\img\apple-touch-icon.svg" />
-    <link rel="icon" href="assets\img\apple-touch-icon.svg" />
+    <link
+      rel="apple-touch-icon"
+      href="{{ url_for('static', filename='assets/img/apple-touch-icon.svg') }}"
+    />
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='assets/img/apple-touch-icon.svg') }}"
+    />
     <title>facecissus - Face Recognition-based Attendance System</title>
     <!-- Bootstrap CSS -->
     <link
@@ -83,7 +89,7 @@
       <div class="row g-0">
         <div class="col-md-1" style="padding: 30px" width="200" height="200">
           <img
-            src="assets\img\sapple-touch-icon2.svg"
+            src="{{ url_for('static', filename='assets/img/apple-touch-icon.svg') }}"
             class="img-fluid rounded-start"
             alt="Icon Image"
           />
